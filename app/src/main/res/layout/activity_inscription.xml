@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Nom de l'utilisateur -->
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom complet" />
+
+        <!-- Email -->
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
+
+        <!-- Mot de passe -->
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mot de passe"
+            android:inputType="textPassword" />
+
+        <!-- Type d'utilisateur -->
+        <RadioGroup
+            android:id="@+id/userTypeRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioParent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Parent" />
+
+            <RadioButton
+                android:id="@+id/radioChild"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Élève" />
+
+        </RadioGroup>
+
+        <!-- Nombre d'élèves concernés (visible uniquement pour les parents) -->
+        <EditText
+            android:id="@+id/numChildrenEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre d'élèves concernés"
+            android:inputType="number" />
+
+        <!-- Informations de l'élève -->
+        <EditText
+            android:id="@+id/studentNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom de l'élève" />
+
+        <EditText
+            android:id="@+id/studentGradeEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Niveau scolaire" />
+
+        <!-- Formule -->
+        <RadioGroup
+            android:id="@+id/formuleRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/formule1RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 cours par année scolaire" />
+
+            <RadioButton
+                android:id="@+id/formule2RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 cours par année scolaire" />
+
+            <RadioButton
+                android:id="@+id/formuleAllRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tous les cours d'une année scolaire" />
+
+        </RadioGroup>
+
+        <!-- Accompagnement -->
+        <RadioGroup
+            android:id="@+id/accompagnementRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/accompagnementProgressionRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Progression (documents électroniques uniquement)" />
+
+            <RadioButton
+                android:id="@+id/accompagnementTchatRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Accompagnement (accès à un tchat avec un enseignant)" />
+
+        </RadioGroup>
+
+        <!-- Informations de paiement -->
+        <EditText
+            android:id="@+id/paymentInfoEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Informations de paiement" />
+
+        <!-- Bouton Soumettre -->
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="S'inscrire" />
+
+    </LinearLayout>
+</ScrollView>
