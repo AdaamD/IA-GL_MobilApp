@@ -4,32 +4,42 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication_ia.R;
 
+import java.util.List;
+import java.util.Map;
+
 public class ExercisesActivity extends AppCompatActivity {
+    private RecyclerView exercisesRecyclerView;
+    private ExerciseAdapter exerciseAdapter;
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercises);
 
-        // Récupérez les références aux vues
-        TextView exercise1TextView = findViewById(R.id.exercise1TextView);
-        TextView exercise2TextView = findViewById(R.id.exercise2TextView);
-        TextView exercise3TextView = findViewById(R.id.exercise3TextView);
+        databaseHelper = new DatabaseHelper(this);
 
-        // Définissez les informations pour chaque exercice
-        exercise1TextView.setText("Exercice 1 - Titre : Écrivez un programme qui affiche \"Bonjour le monde\"\n" +
-                "Description : Apprenez à écrire votre premier programme en Java\n" +
-                "Difficulté : Facile");
+        // Ajout d'exercices de test si la base de données est vide
+        if (databaseHelper.getAllExercises().isEmpty()) {
+            addSampleExercises();
+        }
 
-        exercise2TextView.setText("Exercice 2 - Titre : Calculez la somme de deux nombres\n" +
-                "Description : Apprenez à effectuer des opérations arithmétiques de base en Java\n" +
-                "Difficulté : Moyenne");
+        exercisesRecyclerView = findViewById(R.id.exercisesRecyclerView);
+        exercisesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        exercise3TextView.setText("Exercice 3 - Titre : Écrivez un programme qui trie une liste de nombres\n" +
-                "Description : Apprenez les bases de l'algorithmique en Java\n" +
-                "Difficulté : Difficile");
+        List<Map<String, String>> exercises = databaseHelper.getAllExercises();
+        exerciseAdapter = new ExerciseAdapter(exercises);
+        exercisesRecyclerView.setAdapter(exerciseAdapter);
+    }
+
+    private void addSampleExercises() {
+        databaseHelper.addExercise("Écrivez un programme qui affiche \"Bonjour le monde\"", "Apprenez à écrire votre premier programme en Java", "Facile");
+        databaseHelper.addExercise("Calculez la somme de deux nombres", "Apprenez à effectuer des opérations arithmétiques de base en Java", "Moyenne");
+        databaseHelper.addExercise("Écrivez un programme qui trie une liste de nombres", "Apprenez les bases de l'algorithmique en Java", "Difficile");
     }
 }

@@ -6,10 +6,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "UserDatabase.db";
     private static final int DATABASE_VERSION = 1;
 
+    // Définissez les noms des colonnes de la table des utilisateurs
     private static final String TABLE_USERS = "users";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_NAME = "name";
@@ -22,6 +28,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_FORMULE = "formule";
     private static final String COLUMN_ACCOMPAGNEMENT = "accompagnement";
     private static final String COLUMN_PAYMENT_INFO = "payment_info";
+
+    // Définissez les noms des colonnes de la table des cours
+    private static final String TABLE_COURSES = "courses";
+    private static final String COLUMN_COURSE_ID = "course_id";
+    private static final String COLUMN_COURSE_TITLE = "title";
+    private static final String COLUMN_COURSE_DESCRIPTION = "description";
+    private static final String COLUMN_COURSE_DURATION = "duration";
+
+    // Définissez les noms des colonnes de la table des exercices
+    private static final String TABLE_EXERCISES = "exercises";
+    private static final String COLUMN_EXERCISE_ID = "exercise_id";
+    private static final String COLUMN_EXERCISE_TITLE = "title";
+    private static final String COLUMN_EXERCISE_DESCRIPTION = "description";
+    private static final String COLUMN_EXERCISE_DIFFICULTY = "difficulty";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -43,11 +63,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_PAYMENT_INFO + " TEXT"
                 + ")";
         db.execSQL(CREATE_USERS_TABLE);
+
+        // Création de la table courses
+        String CREATE_COURSES_TABLE = "CREATE TABLE " + TABLE_COURSES + "("
+                + COLUMN_COURSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + COLUMN_COURSE_TITLE + " TEXT,"
+                + COLUMN_COURSE_DESCRIPTION + " TEXT,"
+                + COLUMN_COURSE_DURATION + " TEXT"
+                + ")";
+        db.execSQL(CREATE_COURSES_TABLE);
+
+        String CREATE_EXERCISES_TABLE = "CREATE TABLE " + TABLE_EXERCISES + "("
+                + COLUMN_EXERCISE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + COLUMN_EXERCISE_TITLE + " TEXT,"
+                + COLUMN_EXERCISE_DESCRIPTION + " TEXT,"
+                + COLUMN_EXERCISE_DIFFICULTY + " TEXT"
+                + ")";
+        db.execSQL(CREATE_EXERCISES_TABLE);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_COURSES);
         onCreate(db);
     }
 
@@ -101,4 +140,68 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userType;
     }
 
+    // Ajoutez une méthode pour ajouter un cours à la base de données
+    public long addCourse(String title, String description, String duration) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_COURSE_TITLE, title);
+        values.put(COLUMN_COURSE_DESCRIPTION, description);
+        values.put(COLUMN_COURSE_DURATION, duration);
+        long id = db.insert(TABLE_COURSES, null, values);
+        db.close();
+        return id;
+    }
+
+    public List<Map<String, String>> getAllCourses() {
+        List<Map<String, String>> courseList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_COURSES;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Map<String, String> course = new HashMap<>();
+                course.put("id", cursor.getString(cursor.getColumnIndex(COLUMN_COURSE_ID)));
+                course.put("title", cursor.getString(cursor.getColumnIndex(COLUMN_COURSE_TITLE)));
+                course.put("description", cursor.getString(cursor.getColumnIndex(COLUMN_COURSE_DESCRIPTION)));
+                course.put("duration", cursor.getString(cursor.getColumnIndex(COLUMN_COURSE_DURATION)));
+                courseList.add(course);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return courseList;
+    }
+
+    // Ajoutez une méthode pour ajouter un exercice à la base de données
+    public long addExercise(String title, String description, String difficulty) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_EXERCISE_TITLE, title);
+        values.put(COLUMN_EXERCISE_DESCRIPTION, description);
+        values.put(COLUMN_EXERCISE_DIFFICULTY, difficulty);
+        long id = db.insert(TABLE_EXERCISES, null, values);
+        db.close();
+        return id;
+    }
+
+    // Ajoutez une méthode pour récupérer tous les exercices de la base de données
+    public List<Map<String, String>> getAllExercises() {
+        List<Map<String, String>> exerciseList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_EXERCISES;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Map<String, String> exercise = new HashMap<>();
+                exercise.put("id", cursor.getString(cursor.getColumnIndex(COLUMN_EXERCISE_ID)));
+                exercise.put("title", cursor.getString(cursor.getColumnIndex(COLUMN_EXERCISE_TITLE)));
+                exercise.put("description", cursor.getString(cursor.getColumnIndex(COLUMN_EXERCISE_DESCRIPTION)));
+                exercise.put("difficulty", cursor.getString(cursor.getColumnIndex(COLUMN_EXERCISE_DIFFICULTY)));
+                exerciseList.add(exercise);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return exerciseList;
+    }
 }

@@ -4,30 +4,40 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+import java.util.Map;
 
 public class CoursesActivity extends AppCompatActivity {
+    private RecyclerView coursesRecyclerView;
+    private CourseAdapter courseAdapter;
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
 
-        // Récupérez les références aux vues
-        TextView course1TextView = findViewById(R.id.course1TextView);
-        TextView course2TextView = findViewById(R.id.course2TextView);
-        TextView course3TextView = findViewById(R.id.course3TextView);
+        databaseHelper = new DatabaseHelper(this);
 
-        // Définissez les informations pour chaque cours
-        course1TextView.setText("Cours 1 - Titre : Introduction à la programmation\n" +
-                "Description : Apprenez les bases de la programmation avec Java\n" +
-                "Durée : 2 heures");
+        // Ajout de cours de test si la base de données est vide
+        if (databaseHelper.getAllCourses().isEmpty()) {
+            addSampleCourses();
+        }
 
-        course2TextView.setText("Cours 2 - Titre : Algorithmique et structures de données\n" +
-                "Description : Maîtrisez les algorithmes de base et les structures de données en Java\n" +
-                "Durée : 3 heures");
+        coursesRecyclerView = findViewById(R.id.coursesRecyclerView);
+        coursesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        course3TextView.setText("Cours 3 - Titre : Programmation orientée objet\n" +
-                "Description : Découvrez la programmation orientée objet avec Java\n" +
-                "Durée : 4 heures");
+        List<Map<String, String>> courses = databaseHelper.getAllCourses();
+        courseAdapter = new CourseAdapter(courses);
+        coursesRecyclerView.setAdapter(courseAdapter);
+    }
+
+    private void addSampleCourses() {
+        databaseHelper.addCourse("Introduction à la programmation", "Apprenez les bases de la programmation avec Java", "2 heures");
+        databaseHelper.addCourse("Algorithmique et structures de données", "Maîtrisez les algorithmes de base et les structures de données en Java", "3 heures");
+        databaseHelper.addCourse("Programmation orientée objet", "Découvrez la programmation orientée objet avec Java", "4 heures");
     }
 }

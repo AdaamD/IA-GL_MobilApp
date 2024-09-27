@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
         // Create a default parent user if not exists
         createDefaultParentUser();
 
+        // Create a default child user if not exists
+        createDefaultChildUser();
+
         // Set up the button for Inscription
         Button buttonInscription = findViewById(R.id.button_inscription);
         buttonInscription.setOnClickListener(new View.OnClickListener() {
@@ -81,5 +84,32 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void createDefaultChildUser() {
+        String defaultEmail = "enfant@example.com";
+        String defaultPassword = "password456";
+
+        if (!databaseHelper.checkUser(defaultEmail)) {
+            long userId = databaseHelper.addUser(
+                    "Default Enfant",
+                    defaultEmail,
+                    defaultPassword,
+                    "child", // User type is now a string
+                    0, // Number of children (0 for a child user)
+                    "Default Enfant", // Student name
+                    "Grade 3", // Example grade
+                    R.id.formule2RadioButton, // Using the ID of the radio button for formule
+                    R.id.accompagnementTchatRadioButton, // Using the ID of the radio button for accompagnement
+                    "N/A" // Payment info not applicable for child
+            );
+
+            if (userId > 0) {
+                Toast.makeText(this, "Utilisateur enfant par défaut créé", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Échec de la création de l'utilisateur enfant par défaut", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
 }

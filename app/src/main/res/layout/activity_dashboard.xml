@@ -1,85 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
     android:background="@drawable/background">
 
-    <!-- Bienvenue -->
-    <TextView
-        android:id="@+id/welcomeTextView"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bienvenue, parent !"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF" />
+        android:padding="16dp">
 
-    <!-- Visualiser les moments de connexion de l’élève. -->
-    <TextView
-        android:id="@+id/connectionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Visualiser les moments de connexion de l’élève."
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF" />
+        <TextView
+            android:id="@+id/welcomeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenue, parent !"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#050505"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Visualiser les cours et les exercices réalisés par l’élève. -->
-    <TextView
-        android:id="@+id/coursesTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Visualiser les cours et les exercices réalisés par l’élève."
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/connectionCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#80FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/welcomeTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Visualiser les durées d’activité sur l’application. -->
-    <TextView
-        android:id="@+id/durationTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Visualiser les durées d’activité sur l’application."
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
-    <!-- Visualiser des courbes de progression. -->
-    <TextView
-        android:id="@+id/progressionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Visualiser des courbes de progression."
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF" />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_back"
+                    android:layout_gravity="center_vertical"/>
 
-    <!-- Visualiser des recommandations pour la progression de l’élève. -->
-    <TextView
-        android:id="@+id/recommendationsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Visualiser des recommandations pour la progression de l’élève.\n- Recommandations pour une progression adaptée à l’élève concerné.\n- Recommandations et conseils généraux."
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF" />
+                <TextView
+                    android:id="@+id/connectionTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Moments de connexion de l'élève"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginStart="16dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    <!-- Définir des moments de rappel à l’élève pour revenir sur l’application. -->
-    <TextView
-        android:id="@+id/remindersTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Définir des moments de rappel à l’élève pour revenir sur l’application."
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/coursesCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#80FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/connectionCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_back"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:id="@+id/coursesTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cours et exercices réalisés"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginStart="16dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/durationCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#80FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/coursesCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_back"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:id="@+id/durationTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Durées d'activité sur l'application"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginStart="16dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/progressionCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#80FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/durationCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_back"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:id="@+id/progressionTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Courbes de progression"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginStart="16dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/recommendationsCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#80FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/progressionCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_back"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:id="@+id/recommendationsTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recommandations pour la progression"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginStart="16dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/remindersCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#80FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/recommendationsCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_back"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:id="@+id/remindersTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Définir des rappels"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginStart="16dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

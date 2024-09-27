@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.card.MaterialCardView;
+
 public class StudentDashboardActivity extends AppCompatActivity {
 
     @Override
@@ -17,12 +19,12 @@ public class StudentDashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student_dashboard);
 
         // Récupérez les références aux vues
-        Button coursesButton = findViewById(R.id.coursesButton);
-        Button exercisesButton = findViewById(R.id.exercisesButton);
-        Button recommendationsButton = findViewById(R.id.recommendationsButton);
+        MaterialCardView coursesCard = findViewById(R.id.coursesCard);
+        MaterialCardView exercisesCard = findViewById(R.id.exercisesCard);
+        MaterialCardView recommendationsCard = findViewById(R.id.recommendationsCard);
 
         // Définissez les actions pour chaque bouton
-        coursesButton.setOnClickListener(new View.OnClickListener() {
+        coursesCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Ajoutez le code pour afficher les cours
@@ -30,7 +32,7 @@ public class StudentDashboardActivity extends AppCompatActivity {
             }
         });
 
-        exercisesButton.setOnClickListener(new View.OnClickListener() {
+        exercisesCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Ajoutez le code pour afficher les exercices
@@ -38,7 +40,7 @@ public class StudentDashboardActivity extends AppCompatActivity {
             }
         });
 
-        recommendationsButton.setOnClickListener(new View.OnClickListener() {
+        recommendationsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Ajoutez le code pour afficher les recommandations

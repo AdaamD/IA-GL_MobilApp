@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,40 +8,27 @@
     android:background="@drawable/background"
     tools:context=".RecommendationsActivity">
 
-    <!-- Recommandation 1 -->
     <TextView
-        android:id="@+id/recommendation1TextView"
-        android:layout_width="0dp"
+        android:id="@+id/recommendationsTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toStartOf="@+id/recommendation2TextView"
+        android:text="Recommandations"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="16dp"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Recommandation 2 -->
-    <TextView
-        android:id="@+id/recommendation2TextView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recommendationsRecyclerView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toStartOf="@+id/recommendation3TextView"
-        app:layout_constraintStart_toEndOf="@+id/recommendation1TextView"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="16dp"/>
-
-    <!-- Recommandation 3 -->
-    <TextView
-        android:id="@+id/recommendation3TextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/recommendation2TextView"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="16dp"/>
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/recommendationsTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
